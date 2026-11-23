@@ -1,0 +1,43 @@
+{
+    "name": "Python 3",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+
+    "postCreateCommand": "pipenv install --dev",
+    "postAttachCommand": "pipenv shell",
+
+    "forwardPorts": [8000],
+    "portsAttributes": {
+        "8000": {
+            "label": "Local static webserver",
+            "onAutoForward": "notify"
+        }
+    },
+
+    "remoteEnv": {
+        "AZURE_SQL_SERVER": "${{ secrets.AZURE_SQL_SERVER }}",
+        "AZURE_SQL_DATABASE": "${{ secrets.AZURE_SQL_DATABASE }}",
+        "AZURE_SQL_USER": "${{ secrets.AZURE_SQL_USER }}",
+        "AZURE_SQL_PASSWORD": "${{ secrets.AZURE_SQL_PASSWORD }}",
+    },
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-toolsai.jupyter",
+                "ms-mssql.mssql",
+                "github.copilot",
+                "GitHub.copilot-labs"
+            ],
+            "settings": {
+                "workbench.colorTheme": "Tomorrow Night Blue"
+            }
+        }
+    }
+}
+
+   
